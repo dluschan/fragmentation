@@ -5,7 +5,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-uint f(uint n)
+uint f(uint n, uint base)
 {
 	switch(n)
 	{
@@ -14,14 +14,12 @@ uint f(uint n)
 	case 2:
 		return 1;
 	case 3:
-		return 2;
+		return (base > 3) ? 2 : 1;
 	default:
 		uint k = ceil(-0.5+sqrt(1+8*n)/2);
 		uint res = 0;
 		for (uint i = k; i <= n; ++i)
-		{
-			res += f(n-k);
-		}
+			res += f(n-i, i);
 		return res;
 	}
 
@@ -30,8 +28,8 @@ uint f(uint n)
 
 int main()
 {
-	uint n = 6;
+	uint n = 7;
 	//cin >> n;
-	cout << f(n) << endl;
+	cout << f(n, n+1) << endl;
 	return 0;
 }
