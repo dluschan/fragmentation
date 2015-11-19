@@ -28,8 +28,8 @@ uint f(uint n, uint base)
 
 int main()
 {
-	uint n = 7;
-	//cin >> n;
+	uint n;
+	cin >> n;
 	cout << f(n, n+1) << endl;
 	return 0;
 }
