@@ -5,6 +5,24 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+template<uint N>
+struct Capacity
+{
+	enum
+	{
+		value = N - 1 + Capacity<N-1>::value
+	};
+};
+
+template<>
+struct Capacity<0>
+{
+	enum
+	{
+		value = 0
+	};
+};
+
 uint f(uint n, uint base)
 {
 	switch(n)
@@ -28,8 +46,6 @@ uint f(uint n, uint base)
 
 int main()
 {
-	uint n;
-	cin >> n;
-	cout << f(n, n+1) << endl;
+	cout << "Емкость блока " << Capacity<11>::value << endl;
 	return 0;
 }
