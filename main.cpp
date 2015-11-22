@@ -76,7 +76,7 @@ struct FragImpl
 {
 	enum
 	{
-		value = Check<N, Base, N < Capacity<Base>::value>::value
+		value = Check<N, Base, N <= Capacity<Base>::value>::value
 	};
 };
 
