@@ -124,9 +124,34 @@ uint frag(uint n)
 	return fragImpl(n, n+1);
 }
 
+template<uint N>
+struct Prepare
+{
+	static uint f(uint n)
+	{
+		switch(n)
+		{
+		case N:
+			return Frag<N>::value;
+		default:
+			return Prepare<N-1>::f(n);
+		}
+	}
+};
+
+template<>
+struct Prepare<1>
+{
+	static uint f(uint n)
+	{
+		return Frag<1>::value;
+	}
+};
+
 int main()
 {
-	const uint n = 150;
-	cout << frag(n) << ' ' << Frag<n>::value << endl;
+	uint n;
+	cin >> n;
+	cout << Prepare<150>::f(n) << endl;
 	return 0;
 }
