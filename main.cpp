@@ -89,15 +89,6 @@ struct FragImpl<0, 0>
 	};
 };
 
-template<>
-struct FragImpl<0, 1>
-{
-	enum
-	{
-		value = 1
-	};
-};
-
 template<uint N>
 struct Frag
 {
@@ -107,7 +98,7 @@ struct Frag
 	};
 };
 
-uint f(uint n, uint base)
+uint fragImpl(uint n, uint base)
 {
 	switch(n)
 	{
@@ -121,15 +112,20 @@ uint f(uint n, uint base)
 		uint k = ceil(-0.5+sqrt(1+8*n)/2);
 		uint res = 0;
 		for (uint i = k; i <= n; ++i)
-			res += f(n-i, i);
+			res += fragImpl(n-i, i);
 		return res;
 	}
 
 	return n;
 }
 
+uint frag(uint n)
+{
+	return fragImpl(n, n+1);
+}
+
 int main()
 {
-	cout << "Количество вариантов: " << Frag<1>::value << endl;
+	cout << frag(10) << ' ' << Frag<10>::value << endl;
 	return 0;
 }
