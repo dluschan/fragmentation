@@ -111,7 +111,7 @@ uint fragImpl(uint n, uint base)
 	default:
 		uint k = ceil(-0.5+sqrt(1+8*n)/2);
 		uint res = 0;
-		for (uint i = k; i <= n; ++i)
+		for (uint i = k; i <= n && base > i; ++i)
 			res += fragImpl(n-i, i);
 		return res;
 	}
@@ -126,6 +126,7 @@ uint frag(uint n)
 
 int main()
 {
-	cout << frag(10) << ' ' << Frag<10>::value << endl;
+	const uint n = 150;
+	cout << frag(n) << ' ' << Frag<n>::value << endl;
 	return 0;
 }
