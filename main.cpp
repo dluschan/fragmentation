@@ -125,33 +125,27 @@ uint frag(uint n)
 }
 
 template<uint N>
-struct Prepare
+uint f(uint n)
 {
-	static uint f(uint n)
+	switch(n)
 	{
-		switch(n)
-		{
-		case N:
-			return Frag<N>::value;
-		default:
-			return Prepare<N-1>::f(n);
-		}
+	case N:
+		return Frag<N>::value;
+	default:
+		return f<N-1>(n);
 	}
-};
+}
 
 template<>
-struct Prepare<1>
+uint f<0>(uint n)
 {
-	static uint f(uint n)
-	{
-		return Frag<1>::value;
-	}
-};
+	return Frag<0>::value;
+}
 
 int main()
 {
 	uint n;
 	cin >> n;
-	cout << Prepare<150>::f(n) << endl;
+	cout << f<150>(n) << endl;
 	return 0;
 }
